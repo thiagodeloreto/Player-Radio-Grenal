@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rádio Grenal</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500&display=swap" rel="stylesheet">
+
+<style>
+        /* Coloque aqui o conteúdo do arquivo styles.css */
+        .player {
+            background-color: rgba(221, 180, 37, 0.9);
+            width: 100%;
+            height: 60px;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 5px 30px;
+            z-index: 999;
+        }
+
+        .titulo {
+            color: #fff;
+            font-size: 1.5em;
+            font-family: 'Saira Condensed', sans-serif;
+            font-weight: 700;
+        }
+
+        .botoes {
+            display: flex;
+            align-items: center;
+        }
+
+        .no_ar {
+            color: #fff;
+            font-size: 1.5em;
+            font-family: 'Saira Condensed', sans-serif;
+            font-weight: 700;
+        }
+
+        .play {
+            font-size: 3em;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .pause, .plus, .minus {
+            font-size: 2.5em;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+	
+	/* Estilos para dispositivos móveis */
+	@media (max-width: 950px){
+		.player {
+                height: 80px;
+                padding: 10px;
+            }
+
+            .titulo, .no_ar {
+                font-size: 1em;
+            }
+
+            .play {
+                font-size: 2em;
+                margin-right: 5px;
+            }
+
+            .pause, .plus, .minus {
+                font-size: 1.5em;
+                margin-right: 5px;
+            }
+	}
+	
+        @media (max-width: 680px) {
+            .player {
+                height: 80px;
+                padding: 5px;
+            }
+
+            .titulo {
+                font-size: 0.5em;
+            }
+			
+			.no_ar{
+				display: none;
+			}
+
+            .play {
+                font-size: 2em;
+                margin-right: 5px;
+            }
+
+            .pause, .plus, .minus {
+                font-size: 1.5em;
+                margin-right: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="player">
+<div class="titulo">
+<h2>OUÇA AO VIVO</h2>
+</div>
+<div class="botoes">
+<i class="fa-solid fa-circle-play fa-2xl play" id="play" style="color: #fff;"></i>
+<i class="fa-solid fa-circle-pause fa-2xl pause" id="pause" style="color: #fff;"></i>
+<i class="fa-solid fa-circle-plus fa-2xl plus" id="plus" style="color: #fff;"></i>
+<i class="fa-solid fa-circle-minus fa-2xl minus" id="minus" style="color: #fff;"></i>
+</div>
+<div class="no_ar">
+<h2>NO AR: Rádio Grenal</h2>
+</div>
+
+<audio id="radioPlayer" src="https://grenal.audiostream.com.br:20000/mp3"></audio>
+</div>
+
+<script>
+        // Coloque aqui o conteúdo do arquivo script.js
+        const radioPlayer = document.getElementById('radioPlayer');
+        const playButton = document.getElementById('play');
+        const pauseButton = document.getElementById('pause');
+        const plusButton = document.getElementById('plus');
+        const minusButton = document.getElementById('minus');
+        const noArText = document.querySelector('.no_ar h2');
+        noArText.textContent = 'NO AR: Rádio Grenal';
+
+        // Definir a fonte do áudio
+        radioPlayer.src = 'https://grenal.audiostream.com.br:20000/mp3';
+
+        // Função para iniciar a reprodução
+        function playRadio() {
+            radioPlayer.play();
+        }
+
+        // Função para pausar a reprodução
+        function pauseRadio() {
+            radioPlayer.pause();
+        }
+
+        // Função para aumentar o volume
+        function increaseVolume() {
+            if (radioPlayer.volume < 1) {
+                radioPlayer.volume += 0.1;
+            }
+        }
+
+        // Função para diminuir o volume
+        function decreaseVolume() {
+            if (radioPlayer.volume > 0) {
+                radioPlayer.volume -= 0.1;
+            }
+        }
+
+        // Adicionar event listeners aos botões
+        playButton.addEventListener('click', playRadio);
+        pauseButton.addEventListener('click', pauseRadio);
+        plusButton.addEventListener('click', increaseVolume);
+        minusButton.addEventListener('click', decreaseVolume);
+</script>
+</body>
+</html>
